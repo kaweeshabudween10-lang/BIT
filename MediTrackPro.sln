@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediTrack.Core", "MediTrack.Core\MediTrack.Core.csproj", "{545460DE-C068-4F1C-9D23-9FA9C28FA58C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediTrack.UI", "MediTrack.UI\MediTrack.UI.csproj", "{E4FAB1F8-1D37-41E1-A3E4-29E0DFC058DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediTrack.Data", "MediTrack.Data\MediTrack.Data.csproj", "{65FB1C37-6687-4928-A89B-1FE4747825E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediTrack.Tests", "MediTrack.Tests\MediTrack.Tests.csproj", "{BA0A3501-421D-411D-A094-51752FC55B97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{545460DE-C068-4F1C-9D23-9FA9C28FA58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545460DE-C068-4F1C-9D23-9FA9C28FA58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545460DE-C068-4F1C-9D23-9FA9C28FA58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545460DE-C068-4F1C-9D23-9FA9C28FA58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4FAB1F8-1D37-41E1-A3E4-29E0DFC058DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4FAB1F8-1D37-41E1-A3E4-29E0DFC058DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4FAB1F8-1D37-41E1-A3E4-29E0DFC058DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4FAB1F8-1D37-41E1-A3E4-29E0DFC058DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65FB1C37-6687-4928-A89B-1FE4747825E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65FB1C37-6687-4928-A89B-1FE4747825E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65FB1C37-6687-4928-A89B-1FE4747825E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65FB1C37-6687-4928-A89B-1FE4747825E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0A3501-421D-411D-A094-51752FC55B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0A3501-421D-411D-A094-51752FC55B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0A3501-421D-411D-A094-51752FC55B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0A3501-421D-411D-A094-51752FC55B97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

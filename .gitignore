@@ -1,0 +1,17 @@
+# .NET build output
+.vs/
+**/bin/
+**/obj/
+TestResults/
+
+# User-specific IDE files
+*.user
+*.suo
+
+# Local database files
+*.db
+*.db-shm
+*.db-wal
+
+# Large local archive
+/MediTrack.Core.zip

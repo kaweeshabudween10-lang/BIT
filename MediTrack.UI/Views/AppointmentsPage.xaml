@@ -1,0 +1,62 @@
+<Page x:Class="MediTrack.UI.Pages.AppointmentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Appointment Scheduling">
+
+    <Border Padding="20" Background="#F8FAFC">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="White" Padding="15" CornerRadius="8" Margin="0,0,15,0">
+                <StackPanel>
+                    <TextBlock Text="📅 Book Appointment" FontSize="18" FontWeight="Bold" Foreground="#1E293B" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Select Patient" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="CmbPatients" DisplayMemberPath="FullName" SelectedValuePath="PatientId" Height="35" Margin="0,0,0,12" SelectionChanged="BookingCriteria_SelectionChanged"/>
+
+                    <TextBlock Text="Select Doctor" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="CmbDoctors" DisplayMemberPath="Specialization" SelectedValuePath="DoctorId" Height="35" Margin="0,0,0,12" SelectionChanged="BookingCriteria_SelectionChanged"/>
+
+                    <TextBlock Text="Date" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="DpDate" Height="35" Margin="0,0,0,12" SelectedDateChanged="DpDate_SelectedDateChanged"/>
+
+                    <TextBlock Text="Time (HH:mm)" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                    <TextBox x:Name="TxtTime" Text="09:00" Height="35" Padding="5" VerticalContentAlignment="Center" Margin="0,0,0,20"/>
+
+                    <TextBlock Text="Smart Slot Recommendations" FontWeight="Bold" Foreground="#2563EB" Margin="0,10,0,5"/>
+                    <ListBox x:Name="LstSmartSlots" Height="120" Margin="0,0,0,15" SelectionChanged="LstSmartSlots_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="2">
+                                    <TextBlock Text="{Binding SlotTime, StringFormat={}{0:HH:mm}}" FontWeight="Bold" Width="50"/>
+                                    <TextBlock Text="{Binding Recommendation}" Width="110" Foreground="#059669" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Reason}" FontSize="11" Foreground="#64748B"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Content="Save Appointment" Height="40" Background="#2563EB" Foreground="White" FontWeight="Bold" Click="BtnSave_Click"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="Upcoming Schedule" FontSize="18" FontWeight="Bold" Foreground="#1E293B" Margin="0,0,0,15"/>
+                    <DataGrid x:Name="GridAppointments" AutoGenerateColumns="False" Height="400" Background="White" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding AppointmentId}" Width="50"/>
+                            <DataGridTextColumn Header="Date &amp; Time" Binding="{Binding DateTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Width="140"/>
+                            <DataGridTextColumn Header="Patient" Binding="{Binding Patient.FullName}" Width="150"/>
+                            <DataGridTextColumn Header="Doctor ID" Binding="{Binding DoctorId}" Width="80"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>
