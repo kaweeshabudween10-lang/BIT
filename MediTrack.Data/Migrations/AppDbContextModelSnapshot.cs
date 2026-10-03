@@ -45,7 +45,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Doctor", b =>
@@ -71,7 +71,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("DoctorId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Invoice", b =>
@@ -98,7 +98,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("InvoiceId");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("Invoices", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Medicine", b =>
@@ -122,7 +122,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("MedicineId");
 
-                    b.ToTable("Medicines");
+                    b.ToTable("Medicines", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Patient", b =>
@@ -167,7 +167,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("PatientId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.PatientRiskScore", b =>
@@ -195,7 +195,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("RiskScoreId");
 
-                    b.ToTable("PatientRiskScores");
+                    b.ToTable("PatientRiskScores", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Prescription", b =>
@@ -221,7 +221,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("PrescriptionId");
 
-                    b.ToTable("Prescriptions");
+                    b.ToTable("Prescriptions", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.User", b =>
@@ -251,7 +251,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Visit", b =>
@@ -279,7 +279,7 @@ namespace MediTrack.Data.Migrations
 
                     b.HasKey("VisitId");
 
-                    b.ToTable("Visits");
+                    b.ToTable("Visits", (string)null);
                 });
 
             modelBuilder.Entity("MediTrack.Data.Models.Appointment", b =>

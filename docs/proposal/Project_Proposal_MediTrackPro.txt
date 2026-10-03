@@ -1,0 +1,131 @@
+PROJECT PROPOSAL
+
+Project Title: MediTrackPro - Clinic Management System
+
+Prepared by: [Student Name]
+Course / Module: [Course or Module]
+Institution: [Institution Name]
+Supervisor: [Supervisor Name]
+Date: [Submission Date]
+
+1. PROJECT SUMMARY
+
+MediTrackPro is a Windows desktop application intended to support the day-to-day administrative work of a small clinic. It brings patient record lookup, appointment scheduling, prescription preparation, billing and inventory information, staff account management, and operational summaries into one application. The system is designed for clinic staff who need a shared, organized way to handle routine information without relying on disconnected manual records.
+
+The current implementation is a .NET 8 Windows Presentation Foundation (WPF) application. It stores data in a local SQLite database accessed through Entity Framework Core. Its service layer contains validation and scheduling logic, including appointment conflict checks, recommended time-slot scoring, and a patient follow-up risk watchlist. Prescription documents can be generated as PDF files.
+
+2. BACKGROUND AND PROBLEM STATEMENT
+
+Small clinics handle several related workflows: maintaining patient details, coordinating appointments, preparing prescriptions, tracking charges, and monitoring medicine stock. When these activities are managed through separate files or manual processes, staff may spend time searching for information, scheduling conflicts may occur, and important follow-ups or low-stock items may be overlooked.
+
+MediTrackPro addresses this problem by bringing selected clinic workflows into a single desktop system. It provides searchable patient records, appointment booking with conflict checking, a dashboard with clinic indicators, billing and inventory views, and tools for creating prescription PDFs. The application is intended as a clinic workflow prototype and is not a replacement for a certified electronic health record or a clinical decision-making system.
+
+3. AIM
+
+To develop a desktop clinic management system that organizes key administrative workflows and helps clinic staff access operational and patient information more efficiently.
+
+4. OBJECTIVES
+
+- Create a user login flow with staff roles and account activation controls.
+- Store and retrieve patient, doctor, appointment, visit, prescription, medicine, invoice, and risk-score data.
+- Provide patient record search using name, national identity number, or phone number.
+- Schedule appointments and prevent overlapping bookings for the same doctor.
+- Rank available appointment slots using appointment adjacency and recorded patient no-show history.
+- Display dashboard indicators for patient count, today's appointments, monthly revenue, revenue history, and patients needing follow-up.
+- Present medicine inventory and identify items at or below their reorder level.
+- Create invoices for recorded visits and generate prescription documents as PDFs.
+- Apply validation to important operations and test representative service behavior.
+
+5. TARGET USERS
+
+- Administrator: manages staff accounts and can access the application modules.
+- Doctor: accesses patient and appointment workflows and prepares prescriptions.
+- Receptionist: handles patient and appointment workflows and billing.
+- Clinic management: reviews dashboard figures and operational alerts.
+
+Access to selected navigation modules is adjusted according to the signed-in user's role. These role checks currently control the visible navigation options and should be strengthened with service-level authorization before use with real clinical data.
+
+6. PROJECT SCOPE AND MODULES
+
+6.1 Authentication and staff accounts
+
+The application authenticates active users against stored password hashes. BCrypt is used for password hashing. Administrators can create accounts with Admin, Doctor, or Receptionist roles, provide a specialization for doctor accounts, and activate or deactivate accounts. A default administrator account is seeded when the user table is empty; its initial credentials must be changed before any real deployment.
+
+6.2 Patient records
+
+Patient information includes identity and contact details, date of birth, gender, blood group, allergies, and a chronic-condition flag. Staff can view the patient list, search by name, national identity number, or phone, and refresh the list.
+
+6.3 Appointment management
+
+Staff can select a patient, doctor, date, and time, then book a future appointment. The service rejects invalid or past appointments and checks for overlapping 30-minute appointments for the selected doctor. Available slots between 9:00 a.m. and 5:00 p.m. are ranked. The scoring rules favor slots with buffer time and, for patients with multiple recorded no-shows, favor morning times and discourage late-afternoon times. A selected suggested slot can populate the appointment time field.
+
+6.4 Dashboard and follow-up watchlist
+
+The dashboard displays the total patient count, appointments scheduled for the current day, revenue for the current month, and a six-month revenue chart. A follow-up watchlist assigns scores based on configured rules, including a chronic condition without a recent visit, multiple recent no-shows, and a required follow-up without a later recorded visit. The watchlist is a rule-based administrative aid and does not provide a medical diagnosis.
+
+6.5 Billing and medicine inventory
+
+The billing page lists medicine inventory and displays a warning when items reach their reorder levels. Staff can enter a visit ID, consultation fee, and medicine total to create an invoice; the current invoice workflow records the invoice with a Paid status. The service layer also contains medicine stock deduction logic with quantity and stock checks. In the current interface, inventory listing and low-stock alerts are exposed; stock deduction is not presented as a user-facing billing action.
+
+6.6 Prescription PDF generation
+
+A user can select a patient and active doctor, enter a diagnosis and notes, add one or more medicines with dosage and duration, and generate a formatted PDF prescription. The PDF is saved to the Windows Desktop and opened after generation. In the current implementation, this workflow generates the document but does not save the visit and prescription items to the database.
+
+7. TECHNICAL APPROACH
+
+The solution is divided into four projects:
+
+- MediTrack.UI: the WPF desktop interface, pages, navigation, and role-based menu visibility.
+- MediTrack.Core: application services, validation, business rules, password handling, risk scoring, slot scoring, and PDF document generation.
+- MediTrack.Data: Entity Framework Core database context, data models, SQLite configuration, and migrations.
+- MediTrack.Tests: xUnit tests for selected service validation and patient risk scoring behavior.
+
+Main technologies and packages:
+
+- C# and .NET 8
+- WPF for the Windows desktop interface
+- SQLite for local data storage
+- Entity Framework Core 8 for data access and schema migrations
+- LiveCharts for dashboard revenue visualization
+- QuestPDF for prescription PDF generation
+- BCrypt.Net for password hashing
+- xUnit for automated tests
+
+8. DATA AND SECURITY CONSIDERATIONS
+
+The application currently uses a local SQLite database file. This makes the project suitable for a single-computer demonstration, but does not provide multi-user synchronization or centralized access. Patient and clinical information is sensitive. Before real-world use, the system would require a security and privacy review, secure credential setup, stronger authorization checks, appropriate database protection, backup and recovery procedures, audit logging, and compliance with applicable healthcare and data-protection requirements. The seeded administrator password is a development default and must not remain in use.
+
+9. TESTING AND QUALITY ASSURANCE
+
+The current xUnit tests cover representative behavior such as rejection of invalid or past appointments, rejection of non-positive durations or stock quantities, invoice validation, unsupported account roles, and patient risk-score calculation. Further testing should cover the WPF workflows, role permissions, database migration and recovery, invoice edge cases, PDF output, slot ranking boundaries, and data privacy controls.
+
+10. EXPECTED OUTCOMES
+
+The completed prototype is expected to:
+
+- Keep selected clinic workflows accessible from one desktop application.
+- Reduce time spent searching patient records and reviewing basic clinic activity.
+- Help staff avoid overlapping doctor appointments.
+- Make available appointment times easier to compare through rule-based ranking.
+- Highlight patients who may need administrative follow-up and medicines that may need reordering.
+- Provide a consistent workflow for recording invoices and preparing printable prescriptions.
+- Demonstrate layered application design, local database access, input validation, and automated testing.
+
+11. CURRENT LIMITATIONS AND FUTURE DEVELOPMENT
+
+The current version is a local desktop prototype. It does not provide web or mobile access, cloud synchronization, multi-clinic support, or a complete electronic medical record. Patient records are searchable, but full create, edit, and delete workflows are not present in the current patient page. Prescription PDF generation does not persist the associated visit or prescription items. Inventory is displayed and checked for low stock, but stock deduction is not exposed in the billing screen. The default administrator credentials, local database protection, backups, and stronger authorization require attention before operational deployment.
+
+Potential future improvements include:
+
+- Persisting consultations, diagnoses, follow-up plans, and prescription records.
+- Completing patient, doctor, appointment status, and inventory management workflows.
+- Linking invoice items to medicines and updating stock as part of a controlled billing process.
+- Adding appointment cancellation, rescheduling, reminders, and configurable clinic hours.
+- Providing database backup, restore, audit history, and secure data access controls.
+- Adding reports for appointments, revenue, inventory, and follow-up activity.
+- Evaluating a centralized database or web-based architecture for multiple users and locations.
+- Conducting usability, security, and privacy assessments with representative clinic users.
+
+12. CONCLUSION
+
+MediTrackPro demonstrates how a desktop application can bring several routine clinic administration tasks into a single system. Its current features include patient lookup, appointment scheduling support, dashboard reporting, rule-based follow-up scoring, inventory alerts, invoice creation, staff account management, and prescription PDF generation. The project provides a foundation for further development, while its local-storage design and the limitations described above mean it should be treated as a prototype rather than a production clinical system.

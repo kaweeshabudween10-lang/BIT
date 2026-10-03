@@ -14,4 +14,4 @@ TestResults/
 *.db-wal
 
 # Large local archive
-/MediTrack.Core.zip
+/archives/MediTrack.Core.zip

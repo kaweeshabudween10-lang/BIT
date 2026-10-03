@@ -17,7 +17,7 @@ namespace MediTrack.UI
 
             // Create default admin on first startup
             _authService.SeedDefaultAdmin();
-            AuthService.SeedSamplePatients();
+            AuthService.SeedSampleClinicData();
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -49,6 +49,28 @@ namespace MediTrack.UI
             else
             {
                 ShowError("Invalid username or password.");
+            }
+        }
+
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var registerWindow = new RegisterWindow { Owner = this };
+            if (registerWindow.ShowDialog() == true)
+            {
+                if (FindName("TxtUsername") is System.Windows.Controls.TextBox usernameBox)
+                {
+                    usernameBox.Text = registerWindow.RegisteredUsername;
+                }
+
+                if (FindName("TxtPassword") is System.Windows.Controls.PasswordBox passwordBox)
+                {
+                    passwordBox.Clear();
+                }
+
+                if (FindName("LblError") is System.Windows.Controls.TextBlock errorLabel)
+                {
+                    errorLabel.Visibility = Visibility.Collapsed;
+                }
             }
         }
 

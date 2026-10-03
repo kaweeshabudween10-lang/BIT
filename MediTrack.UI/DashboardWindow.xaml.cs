@@ -9,7 +9,9 @@ namespace MediTrack.UI
     {
         public DashboardWindow(User user)
         {
-            InitializeComponent();
+            System.Windows.Application.LoadComponent(
+                this,
+                new System.Uri("/MediTrack.UI;component/DashboardWindow.xaml", System.UriKind.Relative));
             _currentUser = user;
 
             // Display logged-in user information
